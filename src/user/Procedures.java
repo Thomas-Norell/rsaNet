@@ -7,13 +7,9 @@ import rsa.PrivateKeys;
 import rsa.PublicKeys;
 import server.Account;
 import server.Response;
-
-import java.io.FileNotFoundException;
 import java.math.BigInteger;
 import java.util.ArrayList;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.util.List;
 
 public class Procedures {
     private static void validateResponse(Response r) {
@@ -69,7 +65,7 @@ public class Procedures {
         ReadInbox readRequest = new ReadInbox(me);
         Response resp = client.sendMessage(readRequest);
         validateResponse(resp);
-        ArrayList<Message> cipherText = (ArrayList<Message>) resp.getContents();
+        List<Message> cipherText = (List<Message>) resp.getContents();
         ArrayList<String> messages = new ArrayList();
         for (Message m : cipherText) {
             messages.add(readString(m.getContent(), keys));

@@ -2,6 +2,7 @@ package tests;
 
 
 import client.*;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import user.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -38,7 +40,7 @@ public class ServerTest {
     public void tearDown() {
         client.stopConnection();
     }
-    /*
+
     @Test
     public void testSetup() {
         //Setting up Thomas' account
@@ -107,11 +109,17 @@ public class ServerTest {
         assertEquals(originalMessage, "I love you.");
 
     }
-    */
+
     @Test
     public void testProduction() {
         String[] args = {"keygen", "thomas"};
-        Main.main(args);
+        try {
+            Main.main(args);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
